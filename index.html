@@ -1,0 +1,129 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Diabetes Prediction</h2>
+        <form id="predictionForm" class="mt-4">
+            <div class="form-group">
+                <label>Pregnancies</label>
+                <input type="number" id="Pregnancies" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Glucose</label>
+                <input type="number" id="Glucose" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>BloodPressure</label>
+                <input type="number" id="BloodPressure" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>SkinThickness</label>
+                <input type="number" id="SkinThickness" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Insulin</label>
+                <input type="number" id="Insulin" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>BMI</label>
+                <input type="number" id="BMI" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>DiabetesPedigreeFunction</label>
+                <input type="number" id="DiabetesPedigreeFunction" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" id="Age" class="form-control" required>
+            </div>
+
+            <button type="button" onclick="makePrediction()" class="btn btn-primary">Predict</button>
+        </form>
+        <div class="mt-4" id="result"></div>
+    </div>
+
+    <script>
+        async function makePrediction() {
+    const data = {
+        Pregnancies: document.getElementById("Pregnancies").value,
+        Glucose: document.getElementById("Glucose").value,
+        BloodPressure: document.getElementById("BloodPressure").value,
+        SkinThickness: document.getElementById("SkinThickness").value,
+        Insulin: document.getElementById("Insulin").value,
+        BMI: document.getElementById("BMI").value,
+        DiabetesPedigreeFunction: document.getElementById("DiabetesPedigreeFunction").value,
+        Age: document.getElementById("Age").value
+    };
+
+    try {
+        const response = await fetch('/predict', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        console.log(result); // Check the output in the console
+        document.getElementById("result").innerHTML = `<h4>Prediction: ${result.prediction}</h4>`;
+    } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("result").innerHTML = `<h4>Error occurred while predicting.</h4>`;
+    }
+}
+
+    </script>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Diabetes Prediction</h2>
+        <form id="predictionForm" class="mt-4">
+            <div class="form-group">
+                <label>Pregnancies</label>
+                <input type="number" id="Pregnancies" class="form-control" required>
+            </div>
+            <!-- Add other fields similarly for Glucose, BloodPressure, etc. -->
+            <button type="button" onclick="makePrediction()" class="btn btn-primary">Predict</button>
+        </form>
+        <div class="mt-4" id="result"></div>
+    </div>
+
+    <script>
+        async function makePrediction() {
+            const data = {
+                Pregnancies: document.getElementById("Pregnancies").value,
+                Glucose: document.getElementById("Glucose").value,
+                BloodPressure: document.getElementById("BloodPressure").value,
+                SkinThickness: document.getElementById("SkinThickness").value,
+                Insulin: document.getElementById("Insulin").value,
+                BMI: document.getElementById("BMI").value,
+                DiabetesPedigreeFunction: document.getElementById("DiabetesPedigreeFunction").value,
+                Age: document.getElementById("Age").value
+            };
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            document.getElementById("result").innerHTML = `<h4>Prediction: ${result.prediction}</h4>`;
+        }
+    </script>
+</body>
+</html>
